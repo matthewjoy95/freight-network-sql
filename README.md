@@ -110,3 +110,32 @@ This project simulates a real-world logistics analytics environment and demonstr
 Matthew Joy  
 BSBA, University of Florida  
 Aspiring data / robotics / systems engineer
+
+## How to Run
+
+Clone the repo and start the database with Docker:
+
+```bash
+git clone https://github.com/matthewjoy95/freight-network-sql.git
+cd freight-network-sql
+docker compose up -d
+
+docker exec -i freight_sql_db psql -U freight -d freightdb < schemas/10_generate_freight.sql
+
+docker exec -i freight_sql_db psql -U freight -d freightdb < queries/04_analytics/01_sla_on_time.sql
+
+## Example Output
+
+| priority | shipments | pct_on_time |
+|----------|-----------|-------------|
+| critical | 473       | 100.00      |
+| expedite | 1299      | 100.00      |
+| standard | 3228      | 100.00      |
+
+## Potential Future Improvements (Not Developed as of 02/17/2026)
+
+- Add late-delivery simulation with varied distributions
+- Build dashboard in Tableau / Power BI
+- Add route-level performance analysis
+- Add cost and margin modeling
+
